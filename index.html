@@ -5,5 +5,21 @@
 </head>
 <body>
   <h1>Hello, Electron! ddd</h1>
+  <div id="update-status"></div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    ipcRenderer.on('update-available', (event, message) => {
+      document.getElementById('update-status').innerText = message;
+    });
+
+    ipcRenderer.on('update-error', (event, message) => {
+      document.getElementById('update-status').innerText = message;
+    });
+
+    // Request update check when the window is loaded
+    ipcRenderer.send('check-updates');
+  </script>
 </body>
 </html>

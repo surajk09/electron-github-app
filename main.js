@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow ,ipcMain} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 
@@ -9,6 +9,20 @@ autoUpdater.logger.transports.file.level = 'info';
 // Configure auto updater
 autoUpdater.autoDownload = true;
 autoUpdater.allowDowngrade = false;
+
+
+  // Listen for update downloaded
+// Listen for update downloaded
+autoUpdater.on('update-downloaded', () => {
+  // Send update status to renderer process
+  mainWindow.webContents.send('update-available', 'Update downloaded. Ready to install.');
+});
+
+// Listen for update error
+autoUpdater.on('error', (err) => {
+  // Send update status to renderer process
+  mainWindow.webContents.send('update-error', `Update error: ${err.message}`);
+});
 
 // Check for updates
 app.on('ready', () => {
@@ -45,12 +59,10 @@ app.on('activate', () => {
   }
 });
 
-  // Listen for update downloaded
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall();
+
+ipcMain.on('check-updates', (event, arg) => {
+  // Check for updates when requested from renderer process
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
-// Listen for update error
-autoUpdater.on('error', (err) => {
-  log.error('AutoUpdater error:', err.message);
-});
+app.on('ready', createWindow);
