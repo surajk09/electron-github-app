@@ -1,4 +1,7 @@
 const { app, BrowserWindow } = require('electron');
+const { autoUpdater } = require('electron-updater');
+
+
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -12,7 +15,10 @@ function createWindow() {
   win.loadFile('index.html');
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+    createWindow();
+    autoUpdater.checkForUpdatesAndNotify();
+  });
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -25,3 +31,7 @@ app.on('activate', () => {
     createWindow();
   }
 });
+// Quit the app when the update is downloaded and ready to install
+autoUpdater.on('update-downloaded', () => {
+    autoUpdater.quitAndInstall();
+  });

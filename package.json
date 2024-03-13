@@ -2,16 +2,44 @@
   "name": "electron-github-app",
   "version": "1.0.0",
   "description": "Test electron js project",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
   },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^29.1.2"
+    "electron": "^29.1.2",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.example.electron-github-app",
+    "productName": "Electron GitHub App",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "your.category.type"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "surajk09",
+        "repo": "https://github.com/surajk09/electron-github-app.git",
+        "releaseType": "draft"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.8"
   }
 }
