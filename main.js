@@ -1,6 +1,19 @@
 const { app, BrowserWindow } = require('electron');
 const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
 
+// Set up logger
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+
+// Configure auto updater
+autoUpdater.autoDownload = true;
+autoUpdater.allowDowngrade = false;
+
+// Check for updates
+app.on('ready', () => {
+  autoUpdater.checkForUpdatesAndNotify();
+});
 
 
 function createWindow() {
@@ -31,7 +44,13 @@ app.on('activate', () => {
     createWindow();
   }
 });
-// Quit the app when the update is downloaded and ready to install
+
+  // Listen for update downloaded
 autoUpdater.on('update-downloaded', () => {
-    autoUpdater.quitAndInstall();
-  });
+  autoUpdater.quitAndInstall();
+});
+
+// Listen for update error
+autoUpdater.on('error', (err) => {
+  log.error('AutoUpdater error:', err.message);
+});

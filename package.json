@@ -19,13 +19,24 @@
     "appId": "com.example.electron-github-app",
     "productName": "Electron GitHub App",
     "directories": {
-      "output": "dist"
+      "output": "build"
     },
     "mac": {
       "category": "your.category.type"
     },
     "win": {
       "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
     },
     "linux": {
       "target": "AppImage"
@@ -40,6 +51,7 @@
     ]
   },
   "dependencies": {
+    "electron-log": "^5.1.2",
     "electron-updater": "^6.1.8"
   }
 }
