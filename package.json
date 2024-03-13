@@ -35,7 +35,7 @@
         "provider": "github",
         "owner": "surajk09",
         "repo": "https://github.com/surajk09/electron-github-app.git",
-        "releaseType": "draft"
+        "releaseType": "release"
       }
     ]
   },
