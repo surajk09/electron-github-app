@@ -10,23 +10,19 @@ autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.autoDownload = true;
 autoUpdater.allowDowngrade = false;
 
+// Check for updates
+app.on('ready', () => {
+  autoUpdater.checkForUpdatesAndNotify();
+});
 
-  // Listen for update downloaded
 // Listen for update downloaded
 autoUpdater.on('update-downloaded', () => {
-  // Send update status to renderer process
-  mainWindow.webContents.send('update-available', 'Update downloaded. Ready to install.');
+  autoUpdater.quitAndInstall();
 });
 
 // Listen for update error
 autoUpdater.on('error', (err) => {
-  // Send update status to renderer process
-  mainWindow.webContents.send('update-error', `Update error: ${err.message}`);
-});
-
-// Check for updates
-app.on('ready', () => {
-  autoUpdater.checkForUpdatesAndNotify();
+  log.error('AutoUpdater error:', err.message);
 });
 
 
@@ -58,11 +54,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-
-ipcMain.on('check-updates', (event, arg) => {
-  // Check for updates when requested from renderer process
-  autoUpdater.checkForUpdatesAndNotify();
-});
-
-app.on('ready', createWindow);
