@@ -1,6 +1,6 @@
 {
   "name": "electron-github-app",
-  "version": "7.0.0",
+  "version": "10.0.0",
   "description": "Test electron js project",
   "main": "main.js",
   "scripts": {
