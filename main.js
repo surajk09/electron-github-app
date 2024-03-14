@@ -2,6 +2,12 @@ const { app, BrowserWindow ,ipcMain} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 
+log.transports.file.file = `${app.getPath('userData')}/app.log`;
+log.transports.file.format = '{h}:{i}:{s} {text}';
+log.transports.file.level = 'info';  // Set log level (error, warn, info, verbose, debug, silly)
+log.info(`path --> ${app.getPath('userData')}`)
+
+log.info('App started');
 // Set up logger
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
@@ -12,7 +18,9 @@ autoUpdater.allowDowngrade = false;
 
 // Check for updates
 app.on('ready', () => {
+  log.info('ready1');
   autoUpdater.checkForUpdatesAndNotify();
+  log.info('ready2');
 });
 
 // Listen for update downloaded
@@ -39,8 +47,11 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  log.info('whenReady1');
     createWindow();
+    log.info('whenReady2');
     autoUpdater.checkForUpdatesAndNotify();
+    log.info('whenReady3');
   });
 
 app.on('window-all-closed', () => {
@@ -50,7 +61,11 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
+  log.info('activate1');
   if (BrowserWindow.getAllWindows().length === 0) {
+    log.info('activate2');
     createWindow();
+    log.info('activate3');
   }
+  log.info('activate4');
 });

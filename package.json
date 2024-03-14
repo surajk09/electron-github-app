@@ -43,7 +43,7 @@
       {
         "provider": "github",
         "owner": "surajk09",
-        "repo": "https://github.com/surajk09/electron-github-app.git",
+        "repo": "electron-github-app",
         "releaseType": "release"
       }
     ]
