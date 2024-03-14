@@ -39,14 +39,19 @@
     "linux": {
       "target": "AppImage"
     },
-    "publish": [
+    "publish": 
       {
         "provider": "github",
         "owner": "surajk09",
-        "repo": "electron-github-app",
-        "releaseType": "draft"
+        "repo": "https://github.com/surajk09/electron-github-app.git",
+        "releaseType": "release"
       }
-    ]
+    
+  },
+  "extraMetadata": {
+    "build": {
+      "disableWebInstaller": true
+    }
   },
   "dependencies": {
     "electron-log": "^5.1.2",
