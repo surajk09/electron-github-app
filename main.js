@@ -42,7 +42,7 @@ function createWindow() {
       nodeIntegration: true
     }
   });
-
+  win.setMenu(null)
   win.loadFile('index.html');
 }
 
