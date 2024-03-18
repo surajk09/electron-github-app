@@ -1,6 +1,6 @@
 {
   "name": "electron-github-app",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "Test electron js project",
   "main": "main.js",
   "scripts": {
@@ -23,7 +23,7 @@
       "output": "build"
     },
     "mac": {
-      "category": "your.category.type"
+      "target": "dmg"
     },
     "win": {
       "target": "nsis"
@@ -35,7 +35,7 @@
     "allowToChangeInstallationDirectory": true,
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "license": "license.txt"
+    "license": "terms.html"
     },
     "linux": {
       "target": "AppImage"
