@@ -1,7 +1,7 @@
 {
-  "name": "electron-github-app",
-  "version": "12.0.0",
-  "description": "Test electron js project",
+  "name": "mro-point_of_care",
+  "version": "14.0.0",
+  "description": "Test MRO Point Of Careproject",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,7 +18,7 @@
   },
   "build": {
     "appId": "com.example.electron-github-app",
-    "productName": "Electron GitHub App",
+    "productName": "mro-point_of_care",
     "directories": {
       "output": "build"
     },
@@ -35,7 +35,10 @@
     "allowToChangeInstallationDirectory": true,
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "license": "license.txt"
+    "license": "license.txt",
+    "installerIcon": "build/test.ico",
+      "installerHeaderIcon": "build/test.ico",
+      "deleteAppDataOnUninstall": true
     },
     "linux": {
       "target": "AppImage"
